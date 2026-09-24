@@ -134,7 +134,8 @@ func writeFile(t *testing.T, path, content string) string {
 }
 
 // makeFolder creates a shared folder with a hidden file, a subfolder, an
-// empty subfolder, and a symlink that points outside of it.
+// empty subfolder, and, where the OS allows it, a symlink that points
+// outside of it.
 func makeFolder(t *testing.T) string {
 	t.Helper()
 	dir := filepath.Join(t.TempDir(), "Trip")
@@ -146,7 +147,9 @@ func makeFolder(t *testing.T) string {
 	}
 	secret := writeFile(t, filepath.Join(t.TempDir(), "secret.txt"), "secret")
 	if err := os.Symlink(secret, filepath.Join(dir, "escape.txt")); err != nil {
-		t.Skip("symlinks unavailable:", err)
+		// Windows only lets privileged users create symlinks; the rest of
+		// the folder is still worth testing.
+		t.Log("no symlink to test with:", err)
 	}
 	return dir
 }
