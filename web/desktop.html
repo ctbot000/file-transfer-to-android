@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File Transfer to Android</title>
+<link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/style.css">
+<script type="module" src="/static/desktop.js"></script>
+</head>
+<body>
+<div class="desk">
+  <header class="desk-header">
+    <div class="brand"><img src="/static/icon.svg" alt=""><span>File Transfer to Android</span></div>
+    <div class="status-pill" id="status"><span class="dot"></span><span id="status-text">Connecting…</span></div>
+  </header>
+
+  <div class="banner" id="offline" role="alert" hidden>
+    <strong>The app is not running.</strong>
+    Start it again with <code>file-transfer-to-android</code>; this page reconnects by itself.
+  </div>
+
+  <section class="card nokey" id="stopped" hidden>
+    <h2>Sharing stopped</h2>
+    <p>The app has quit, and the phone link no longer works. Run
+       <code>file-transfer-to-android</code> to share again.</p>
+  </section>
+
+  <section class="card nokey" id="nokey" hidden>
+    <h2>Open the link from the terminal</h2>
+    <p>This page needs the link that <code>file-transfer-to-android</code> printed when it started.
+       Running the command again opens it for you.</p>
+  </section>
+
+  <main class="layout" id="app" hidden>
+    <section class="card connect" aria-labelledby="connect-title">
+      <h2 id="connect-title">Connect your phone</h2>
+      <p>Scan this code with your Android phone's camera.</p>
+      <div class="qr" id="qr" role="img" aria-label="QR code of the phone link"></div>
+      <div class="link">
+        <code id="url"></code>
+        <button class="icon-btn" id="copy" type="button" title="Copy link" aria-label="Copy link"></button>
+      </div>
+      <label class="addr" id="addr-wrap" hidden>
+        Not loading on the phone? Try another address:
+        <select id="addr"></select>
+      </label>
+      <p class="fine">The phone must be on the same Wi-Fi network as this computer.</p>
+    </section>
+
+    <div class="stack">
+      <section class="card" aria-labelledby="shared-title">
+        <div class="card-head">
+          <div>
+            <h2 id="shared-title">Shared with your phone</h2>
+            <div class="sub" id="shared-sub"></div>
+          </div>
+          <div class="actions">
+            <button class="btn" id="add-folder" type="button">Add folder</button>
+            <button class="btn primary" id="add-files" type="button">Add files</button>
+          </div>
+        </div>
+        <div class="dropzone" id="dropzone"></div>
+        <div class="list" id="shared-list"></div>
+        <input type="file" id="pick-files" multiple hidden>
+        <input type="file" id="pick-folder" webkitdirectory hidden>
+      </section>
+
+      <section class="card" id="activity" aria-labelledby="activity-title" hidden>
+        <div class="card-head"><h2 id="activity-title">Activity</h2></div>
+        <div class="list" id="activity-list"></div>
+      </section>
+
+      <section class="card" id="received" aria-labelledby="received-title">
+        <div class="card-head">
+          <div>
+            <h2 id="received-title">Received from your phone</h2>
+            <div class="sub" id="received-sub"></div>
+          </div>
+          <div class="actions"><button class="btn" id="open-folder" type="button">Open folder</button></div>
+        </div>
+        <div class="list" id="received-list"></div>
+        <p class="empty" id="received-empty">Files sent from the phone show up here.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="desk-footer" id="footer" hidden>
+    <span id="version"></span> ·
+    <button class="link-btn" id="quit" type="button">Stop sharing and quit</button>
+  </footer>
+</div>
+<div class="drag-overlay" id="drag-overlay" hidden><div>Drop to share with your phone</div></div>
+</body>
+</html>

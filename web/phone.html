@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f4f6f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1015" media="(prefers-color-scheme: dark)">
+<title>File Transfer</title>
+<link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/style.css">
+<script type="module" src="/static/phone.js"></script>
+</head>
+<body>
+<div class="phone">
+  <header class="topbar">
+    <a class="icon-btn back" id="back" href="#" aria-label="Back" hidden></a>
+    <div class="title">
+      <div class="eyebrow" id="eyebrow">Files from</div>
+      <h1 id="title">…</h1>
+    </div>
+    <span class="dot" id="dot" role="img" aria-label="Connecting"></span>
+  </header>
+
+  <div class="banner" id="offline" role="alert" hidden>
+    <strong id="offline-title">Can't reach the computer</strong>
+    <span id="offline-text">Check that the app is still running and that this phone is on the same Wi-Fi.</span>
+  </div>
+
+  <section class="card" id="files" aria-labelledby="title">
+    <div class="list" id="list"></div>
+    <div class="empty" id="empty" hidden>
+      <strong>Nothing shared yet</strong>
+      Add files on the computer and they show up here.
+    </div>
+  </section>
+
+  <a class="btn primary wide" id="zip" hidden></a>
+
+  <section class="card" id="send" aria-labelledby="send-title" hidden>
+    <div class="card-head">
+      <div>
+        <h2 id="send-title">Send to the computer</h2>
+        <div class="sub">Photos, videos or any other file from this phone.</div>
+      </div>
+    </div>
+    <div class="send-body">
+      <button class="btn wide" id="choose" type="button">Choose files</button>
+      <input type="file" id="file-input" multiple hidden>
+      <div class="list" id="uploads"></div>
+      <p class="fine" id="keep-open" hidden>Keep this page open until sending finishes.</p>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
